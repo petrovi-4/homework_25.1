@@ -5,6 +5,11 @@ from config.settings import NULLABLE
 from courses.models import Course, Lesson
 
 
+class UserRoles(models.TextChoices):
+    MEMBER = 'member', _('member')
+    MODERATOR = 'moderator', _('moderator')
+
+
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='Почта')
@@ -15,6 +20,8 @@ class User(AbstractUser):
     )
     phone = models.CharField(max_length=40, verbose_name='Телефон', **NULLABLE)
     city = models.CharField(max_length=35, verbose_name='Город', **NULLABLE)
+
+    role = models.CharField(max_length=10, choices=UserRoles.choices, default=UserRoles.MEMBER, verbose_name='Роль')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
