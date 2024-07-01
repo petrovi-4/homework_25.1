@@ -32,7 +32,7 @@ class Lesson(models.Model):
     description = models.TextField(verbose_name='описание')
     link_to_video = models.URLField(verbose_name='ссылка на видео')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lesson', **NULLABLE)
-    owner = models.ForeignKey(settings.AUTH_USER, on_delete=models.CASCADE, **NULLABLE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE)
 
     def __str__(self):
         return self.title
